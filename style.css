@@ -1,0 +1,423 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+.header{
+    min-height: 100vh;
+    width: 100%;
+  
+    background-image: linear-gradient(rgba(4,9,30,0.7), rgba(4,9,30,0.7)), url(DeepRun.jpg);
+    background-position: center;
+    background-size: cover;
+    position: relative;
+}
+
+.header-1{
+    min-height: 50vh;
+    min-width:800px;
+    
+    width: 100%;
+    background-image: linear-gradient(rgba(4,9,30,0.7), rgba(4,9,30,0.7)), url(background-2.jpg);
+    background-position: center;
+    background-size: cover;
+    position: relative;
+}
+
+/*CSS Associated with the Navigation Bar*/
+nav{
+    display: flex;
+    padding: 2% 6%;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+nav img{
+    width: 150px; 
+    height:150px;
+}
+
+.nav-links{
+   flex: 1;
+    text-align: right;
+    
+}
+
+.nav-links ul li{
+    list-style: none;
+    display: inline-block;
+    padding: 8px 12px;
+    position: relative;
+}
+
+.nav-links ul li a{
+    color: #fff;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+.nav-links ul li::after{
+    content: '';
+    width: 0%;
+    height: 2px;
+    /*background: #f44336;*/
+    background: #38acf5;
+    display: block;
+    margin: auto;
+    transition: 0.5s;
+}
+
+.nav-links ul li:hover::after{
+    width: 100%;
+}
+
+.text-box{
+    width: 90%;
+    color: #fff;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+.text-box h1{
+    font-size: 62px;
+}
+
+.text-box p{
+    margin: 10px 0 40px;
+    font-size: 14px;
+    color: #fff;
+}
+
+
+nav .fa-solid{
+    display: none;
+}
+
+/*Code for phone screens*/
+@media(max-width: 700px){
+    .text-box h1{
+        font-size: 20px;
+    }
+    .nav-links ul li{
+        display: block;
+    }
+    .nav-links{
+        visibility: hidden;
+        position: absolute;
+        /*background: #f44336;*/
+        background: #38acf5;
+        height: 100vh;
+        width: 200px;
+        top: 0;
+        text-align: left;
+        z-index: 2;
+        right: 10px
+    }
+    nav .fa-solid{
+        display: block;
+        color: #fff;
+        margin: 10px;
+        font-size: 22px;
+        cursor: pointer;
+    }
+
+    .nav-links ul{
+        padding: 30px;
+    }
+    
+}
+
+/*Used for formatting the boxes that contain information, forms, presentations, etc throughout the website*/
+.tutoring{
+    width: 80%;
+    margin: auto;
+    
+    text-align:center;
+    padding-top: 100px;
+    
+}
+
+/*bylaws pdf;*/
+.Bylaws{
+    width:80%;
+    margin:10px auto;
+    text-align: center;
+    padding-top: 60px;
+}
+
+.tutoring-col{
+   
+    width:90vw;
+    background: #dbf4ff;
+    border-radius: 50px;
+    max-width: 600px;
+    min-width:500px;
+    padding: 30px 40px;
+    transition: 0.5s;
+    margin: 20px 20px;
+    position:static;
+    
+}
+/*Formats the calendar*/
+.cal2-col{
+    max-width:150vw;
+    min-width:600px;
+    width:100%;
+    background: #dbf4ff;
+    border-radius: 30px;
+    
+    padding: 30px 60px;
+    transition: 0.5s;
+    margin:20px auto;
+}
+/*Formats the Spreadsheet*/
+.cal-col{
+    max-width:150vw;
+    min-width:600px;
+    width:auto;
+    background: #dbf4ff;
+    border-radius: 30px;
+    padding: 30px 60px;
+    transition: 0.5s;
+    margin:20px auto;
+}
+
+.pastOfficer{
+  
+  flex-basis: 43%;
+  background: #dbf4ff;
+  border-radius: 50px;
+  box-sizing: border-box;
+  transition: 0.5s;
+  padding: 15px 20px;
+  margin:20px 20px;
+  margin-bottom:50px;
+  text-align: center;
+  
+} 
+
+
+
+
+
+.events{
+    width:auto;
+    background: #dbf4ff;
+    border-radius: 50px;
+    padding: 40px 40px;
+    transition: 0.5s;
+    text-align:center;
+    margin:30px;
+    flex-basis:75%;
+}
+.init-col{
+    flex-basis:100%;
+    width:auto;
+    background: #dbf4ff;
+    border-radius: 50px;
+    
+    padding: 60px 40px;
+    transition: 0.5s;
+    margin:5% 5%;
+    
+}
+
+.values-col{
+  
+    flex-basis: 30%;
+    background: #dbf4ff;
+    border-radius: 50px;
+    margin-bottom: 5%;
+    padding: 60px 40px;
+    box-sizing: border-box;
+    transition: 0.5s;
+}
+
+.bylaws-col{
+    flex-basis: 30%;
+    background: #dbf4ff;
+    border-radius: 50px;
+   
+    padding: 40px 40px;
+    box-sizing: border-box;
+    transition: 0.5s;
+    margin:20px auto;
+}
+
+
+/*Officers page code*/
+h1{
+    font-size: 36px;
+    font-weight: 600;
+}
+
+p{
+    color: #000000;
+    font-size: 14px;
+    fit-weight: 300px;
+    line-height: 22px;
+    padding: 10px;
+}
+
+.row{
+   
+    margin-top: 5%;
+    display: flex;
+    justify-content: space-evenly;
+    
+}
+
+
+h3{
+    text-align: center;
+    font-weight: 600;
+    margin: 10px;
+}
+.values-col:hover{
+  box-shadow: 0 0 20px 0px rgba(0,0,0,0.2);
+}
+.tutoring-col:hover{
+    box-shadow: 0 0 20px 0px rgba(0,0,0,0.2); 
+}
+.events:hover{
+  box-shadow: 0 0 20px 0px rgba(0,0,0,0.2); 
+}
+.cal-col:hover{
+    box-shadow: 0 0 20px 0px rgba(0,0,0,0.2); 
+}
+.cal2-col:hover{
+    box-shadow: 0 0 20px 0px rgba(0,0,0,0.2); 
+}
+@media(max-width: 1250px){
+    .row{
+        flex-direction: column;
+    }
+}
+
+.container {
+  margin: 20px 40px;
+  color: black;
+}
+
+.heading {
+  text-align: center;
+  font-size: 60px;
+  color: black;
+}
+
+
+.profiles {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 20px 0px;
+}
+.directorProfile{
+  display: flex;
+  justify-content: space-evenly;
+  margin: 20px 80px;
+ flex-basis: 300px;
+  
+}
+
+.profile {
+  flex-basis: 300px;
+  margin:0px 20px;
+}
+
+.profile .profile-img{
+  height: 350px;
+  width: 250px;
+}
+
+.user-name {
+  margin-top: 30px;
+  font-size: 35px;
+}
+
+.profile h5{
+  font-size: 18px;
+  Font-weight: 250;
+  letter-spacing: 3px;
+  color: #000000;
+}
+
+.profile p{
+  font-size: 16px;
+  margin-top: 20px;
+  text-align: left;
+}
+/*Tutor page for mobile*/
+@media only screen and (max-width: 1350px) {
+  .tutoring-col {
+    flex-direction: column;
+  }
+/*Officers page for mobile*/
+@media only screen and (max-width: 1150px) {
+  .profiles {
+    flex-direction: column;
+  }
+
+  .profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+  }
+
+  .profile p {
+    text-align: center;
+    margin: 20px 60px 80px 60px;
+    font-size: 20px;
+  }
+  .directorProfile{
+  display: flex;
+  justify-content: space-evenly;
+  margin: 20px 80px;
+  flex-direction: column;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .heading {
+    font-size: 40px;
+    color: black;
+    text-align: center;
+  }
+
+  .heading span {
+    font-size: 15px;
+  }
+
+  .profiles {
+    margin: 20px 0;
+  }
+
+  .profile p {
+    margin: 20px 10px 80px 10px;
+  }
+  .directorProfile{
+ 
+  
+  margin: 20px 80px;
+  
+  }
+}
+
+
+
+.pastOfficer_des{
+  color: black;
+  text-align: center;
+  font-size: 20px;
+  display:flex;
+  justify-content: space-evenly
+}
+.mySlides1{
+  
+  margin-bottom: 5%
+}
+

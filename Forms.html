@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, inital-scale = 1.0">
+  <title>Computer Science Honor Society Website</title>
+    <script src="https://kit.fontawesome.com/0a0c1e96ef.js" crossorigin="anonymous"></script>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Favicon Image (small icon next to name shown in the tab)-->
+  <link rel="icon" type="image/x-icon" href="logo.jpg">    
+</head>
+
+<body>
+  <section class = "header-1">
+    <nav>
+        <a href="index.html"><img src = "logo-0.png" width = "150"></a>
+        <div class = "nav-links" id = "navLinks">
+            <i class="fa-solid fa-xmark" onclick = "hideMenu();"></i>
+            <ul>
+                <li> <a href = "index.html">HOME</a> </li>
+                <li> <a href = "about.html">ABOUT</a> </li>
+                <li> <a href = "Calendar.html">CALENDAR</a> </li>
+                <li> <a href = "Forms.html">FORMS</a> </li>
+              <li> <a href = "Events.html">PARTICIPATION/SERVICE</a> </li>
+                <li> <a href = "Meetings.html">MEETINGS</a> </li>
+                <li> <a href = "officers.html">OFFICERS</a> </li>
+                <li> <a href = "Media.html">MEDIA</a> </li>
+                <li> <a href = "Login.html">LOGIN/POINTS</a> </li>
+            </ul>           
+        </div>
+        <i class="fa-solid fa-bars" onclick = "showMenu();"></i>
+    </nav>
+<div class = "text-box">
+    <h1>Forms</h1>
+</div>       
+  </section>
+
+<!-- The section of code below is used to display information about tutoring through CSHS, and also contains the appropriate google forms -->
+  <div class = "main">
+    
+  <section class = "tutoring">
+    <h1>Tutoring Forms</h1>
+    <p>As a member of CSHS, you have the option to:    </p>
+
+  <!-- Reciving Tutoring --> 
+    <div class = "row">
+      <div class = "tutoring-col">
+        <h3>Get Tutored</h3>
+        <p>DRHS CSHS provides tutoring to all members in topics related to computer science. Ask other members to help with tricky homework, or concepts you just don't get.</p>
+    <!-- Embeds the google form used to sign up to recieve tutoring --> 
+        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfBBcyHHp5a49OF2mhjYkuGlzICkeMIbhYFrpLvTUg0ghOGPA/viewform?embedded=true" width="500" height="700" frameborder="0" marginheight="0" marginwidth=auto>Loading…</iframe>
+    </div>
+
+  <!-- Providing Tutoring --> 
+    <div class = "tutoring-col">
+      <h3>Provide Tutoring</h3>
+        <p>As a member, you have the option to help others. If you believe you are good at a specific topic, sign-up to tutor and assist peers with said topic.</p>
+    <!-- Embeds the google form used to sign up to provide tutoring -->
+     <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe_LzvSMSrTrxVK-QMppfQPSXcJnG9daUAV5H7rNbK7c0uILA/viewform?embedded=true" width="500" height="700" frameborder="0" marginheight="0" marginwidth=auto>Loading…</iframe>
+      </div>
+    </div>
+</section>
+  
+  <script src="script.js"></script>
+</body>
+
+</html>

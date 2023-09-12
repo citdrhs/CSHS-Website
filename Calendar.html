@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, inital-scale = 1.0">
+  <title>Computer Science Honor Society Website</title>
+    <script src="https://kit.fontawesome.com/0a0c1e96ef.js" crossorigin="anonymous"></script>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Favicon Image (small icon next to name shown in the tab)-->
+    <link rel="icon" type="image/x-icon" href="logo.jpg">  
+  
+</head>
+
+<body>
+  <section class = "header-1">
+    <nav>
+        <a href="index.html"><img src = "logo-0.png" width = "150"></a>
+        <div class = "nav-links" id = "navLinks">
+            <i class="fa-solid fa-xmark" onclick = "hideMenu();"></i>
+            <ul>
+                <li> <a href = "index.html">HOME</a> </li>
+                <li> <a href = "about.html">ABOUT</a> </li>
+                <li> <a href = "Calendar.html">CALENDAR</a> </li>
+                <li> <a href = "Forms.html">FORMS</a> </li>
+              <li> <a href = "Events.html">PARTICIPATION/SERVICE</a> </li>
+                <li> <a href = "Meetings.html">MEETINGS</a> </li>
+                <li> <a href = "officers.html">OFFICERS</a> </li>
+                <li> <a href = "Media.html">MEDIA</a> </li>
+                <li> <a href = "Login.html">LOGIN/POINTS</a> </li>
+            </ul>           
+        </div>
+        <i class="fa-solid fa-bars" onclick = "showMenu();"></i>
+    </nav>
+<div class = "text-box">
+    <h1>Calendar</h1>
+</div>       
+  </section>   
+</body>
+
+<!-- This section displays the CSHS calender, which can be accessed using the link below.-->
+<!-- https://calendar.google.com/calendar/u/0?cid=Y18xaGRtY2Fkb3Y0bm1qNGszcmJlYjk0Yjdwa0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t --> 
+
+<section class = "tutoring">
+    <h1>CSHS Calender</h1>
+
+    <div class = "row">
+      <div class = "cal2-col">
+        <h3>You can find all our upcoming events on this calender</h3>
+      <!-- This iframe code allows us to embed the calender to the website --> 
+        <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23f5f5f5&ctz=America%2FNew_York&showTitle=0&showCalendars=0&showPrint=1&showNav=1&showTabs=1&src=Y18xaGRtY2Fkb3Y0bm1qNGszcmJlYjk0Yjdwa0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=aGVucmljby5rMTIudmEudXNfY2xhc3Nyb29tZjQ5MzAyMWRAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&src=ZW4udXNhI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%23B39DDB&color=%237627bb&color=%230B8043" style="border-width:0" width=100% height="700" frameborder="0" scrolling="no" class = "cal" ></iframe>
+    </div>  
+  </div>
+</section>
+
+<script src="script.js"></script>
+
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, inital-scale = 1.0">
+  <title>Computer Science Honor Society Website</title>
+    <script src="https://kit.fontawesome.com/0a0c1e96ef.js" crossorigin="anonymous"></script>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+
+<!-- Favicon Image (small icon next to name shown in the tab)-->
+  <link rel="icon" type="image/x-icon" href="logo.jpg">  
+</head>
+
+<body>
+
+  <!--This section of the code is for the navigation bar (as well as the colapsible menu, which is helpful for accessing the website through a mobile device), and it's at the beginning of each html file used for this website   -->
+  <section class = "header">
+    <nav>
+      <a href="index.html"><img src = "logo-0.png" width = "300"></a>
+      <div class = "nav-links" id = "navLinks">
+        <i class="fa-solid fa-xmark" onclick = "hideMenu();"></i>
+          <ul>
+            <li> <a href = "index.html">HOME</a> </li>
+            <li> <a href = "about.html">ABOUT</a> </li>
+            <li> <a href = "Calendar.html">CALENDAR</a> </li>
+            <li> <a href = "Forms.html">FORMS</a> </li>
+            <li> <a href = "Events.html">PARTICIPATION/SERVICE</a> </li>
+            <li> <a href = "Meetings.html">MEETINGS</a> </li>
+            <li> <a href = "officers.html">OFFICERS</a> </li>
+            <li> <a href = "Media.html">MEDIA</a> </li>
+            <li> <a href = "Login.html">LOGIN/POINTS</a> </li>
+          </ul>           
+        </div>
+        <i class="fa-solid fa-bars" onclick = "showMenu();"></i>
+    </nav>
+
+    
+<!--This section is just a short intoduction to the Deep Run chapter of CSHS -->   
+<div class = "text-box">
+    <h1>Computer Science Honor Society</h1>
+    <p>As stated in the Virginia Computer Science Honor Society Constitution, the Deep Run Computer Science Honor Society aims to create enthusiasm for computer science and recognize academic excellence for the Computer Science disciplines. Through service projects and active tutoring, we hope to better our school and community.</p>
+</div>       
+  </section>
+
+  
+<!-- This section has some information about the requirements and procedure for joining CSHS. Ideally, specific information about how to join will be added beneath this section when the application process is going on.-->
+  <section class = "tutoring">
+    <h1>Join CSHS</h1>
+    <p>The Deep Run Chapter of CSHS inducts new members annually in October.</p>
+
+    <div class = "row">
+      <div class = "init-col">
+        <h3>Requirements to Join </h3>
+        <p>
+            Must have taken APCSP or APCSA and maintaned a B+ (87.0)<br>
+            Must have a good academic standing<br>
+            Be dedicated and interested in Computer Science
+        </p>
+    </div>
+
+      <div class = "init-col">
+        <h3>How to Join</h3>
+        <p>In order to be eligible for induction, you must fill out the application, which will be made available in either September or October
+       See Ms. Norris or any of our officers for help or information about the application process, and any questions about CSHS.</p>
+    </div>
+  </div> 
+</div>
+  </section>
+
+  
+  <script src="script.js"></script>
+</body>
+
+</html>

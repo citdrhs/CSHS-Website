@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, inital-scale = 1.0">
+  <title>Computer Science Honor Society Website</title>
+  <script src="https://kit.fontawesome.com/0a0c1e96ef.js" crossorigin="anonymous"></script>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Favicon Image (small icon next to name shown in the tab)-->
+  <link rel="icon" type="image/x-icon" href="logo.jpg">
+  <!-- Favicon Image (small icon next to name shown in the tab)-->
+
+</head>
+
+<body>
+  <section class="header-1">
+    <nav>
+      <a href="index.html"><img src="logo-0.png" width="150"></a>
+      <div class="nav-links" id="navLinks">
+        <i class="fa-solid fa-xmark" onclick="hideMenu();"></i>
+        <ul>
+          <li> <a href="index.html">HOME</a> </li>
+          <li> <a href="about.html">ABOUT</a> </li>
+          <li> <a href="Calendar.html">CALENDAR</a> </li>
+          <li> <a href="Forms.html">FORMS</a> </li>
+          <li> <a href = "Events.html">PARTICIPATION/SERVICE</a> </li>
+          <li> <a href="Meetings.html">MEETINGS</a> </li>
+          <li> <a href="officers.html">OFFICERS</a> </li>
+          <li> <a href="Media.html">MEDIA</a> </li>
+          <li> <a href="Login.html">LOGIN/POINTS</a> </li>
+        </ul>
+      </div>
+      <i class="fa-solid fa-bars" onclick="showMenu();"></i>
+    </nav>
+    <div class="text-box">
+      <h1>Points/Login</h1>
+
+    </div>
+  </section>
+  <script src="script.js"></script>
+
+  <section class="tutoring">
+    <h2>You can log and view your points here</h2>
+    <div class="row">
+
+      <!-- Contains important information about points -->
+      <div class="tutoring-col">
+        <h2>Information about Points</h2>
+        <h4><br>As a CSHS Member, you must earn a minimum of 10 points per year, with at least 2.5 coming from meetings
+        </h4>
+        <p> You can earn points from attending meetings, completing service opportunities, or through participation</p>
+        <p>In total, there are 8 meetings worth 0.5 points each. If you miss a meeting, you can recieve 0.25 meeting
+          points by watching an edpuzzle.</p>
+        <p>In order to log points, use the Logging Points form to the right, and your points will be updated once they
+          are approved. </p>
+        <p>You can check your points below using our Point Viewing System</p>
+        <p> Points from previous years roll over.</p>
+        <p>Contact our Secretary, Heena Parekh, at hcps-parekhhp@henricostudents.org if you have any questions about
+          points.</p>
+      </div>
+      <!-- Embeds the Logging Points Form -->
+      <div class="tutoring-col">
+        <h3>Log Points</h3>
+        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSctaf--mrBNKfhpl9rzwnilwmuQiGqxiSuvpymOIlDPzOYjOg/viewform?embedded=true" width="500" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+      </div>
+
+    </div>
+  </section>
+  <!-- Embeds the Point-Viewing System -->
+  <section class="tutoring">
+    <div class="row">
+      <div class="cal-col">
+        <h3>View Points</h3>
+        <p>Here, you can see how many points you have, as well as where those points are distributed</p>
+        <object data="https://docs.google.com/spreadsheets/d/1KWqmqlvtK8ky5sq9XIgrN1koLhwY6TU92t1iPxBqOEM/edit#gid=0"
+          width=100% height="800" type="text/html">
+      </div>
+    </div>
+  </section>
+
+
+
+
+</body>
+
+</html>

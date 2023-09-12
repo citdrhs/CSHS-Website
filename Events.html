@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, inital-scale = 1.0">
+  <title>Computer Science Honor Society Website</title>
+    <script src="https://kit.fontawesome.com/0a0c1e96ef.js" crossorigin="anonymous"></script>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Favicon Image (small icon next to name shown in the tab)-->
+  <link rel="icon" type="image/x-icon" href="logo.jpg">  
+<!-- Favicon Image (small icon next to name shown in the tab)-->
+  
+</head>
+
+<body>
+  <section class = "header-1">
+    <nav>
+        <a href="index.html"><img src = "logo-0.png" width = "150"></a>
+        <div class = "nav-links" id = "navLinks">
+            <i class="fa-solid fa-xmark" onclick = "hideMenu();"></i>
+            <ul>
+              <li> <a href = "index.html">HOME</a> </li>
+              <li> <a href = "about.html">ABOUT</a> </li>
+              <li> <a href = "Calendar.html">CALENDAR</a> </li>
+              <li> <a href = "Forms.html">FORMS</a> </li>
+              <li> <a href = "Events.html">PARTICIPATION/SERVICE</a> </li>
+              <li> <a href = "Meetings.html">MEETINGS</a> </li>  
+              <li> <a href = "officers.html">OFFICERS</a> </li>
+              <li> <a href = "Media.html">MEDIA</a> </li>
+              <li> <a href = "Login.html">LOGIN/POINTS</a> </li>
+            </ul>           
+        </div>
+        <i class="fa-solid fa-bars" onclick = "showMenu();"></i>
+    </nav>
+<div class = "text-box">
+    <h1>Participation & Service</h1>
+</div>       
+  </section>
+<section class = "tutoring">
+    <h1>Current/Upcoming Service and Participation Opportunities</h1>
+
+    <!-- Make it so that these divs appear when hovered over. -->
+      <!-- Ctrc + V from here -->
+      <div class = "events">
+        <h2 style = "color:#03dbfc">Taking Online CS Courses</h2>
+        <h4 style="color:#027bd1">Participation</h4>
+         <p style="color:red"><b>Year-round Opportunity</b></p>
+        <p>Members can earn participation points by taking online courses in any topic related to
+computer science that is not already taught in the CIT or school curriculum</p>
+          <p>We may ask you to develop a
+supplemental project to showcase your learning depending on the subject.</p>
+       
+        <p><a href = "https://docs.google.com/document/d/1S3riHgYr_w72EahrnoBuBbCuhrN640bMnmKgO28FEYA/edit?usp=sharing"> These are some resources to help you get started </a></p>
+        <p>You can log participation points <a href = "Login.html"> here</a></p>
+      </div>
+     <!-- To here-->
+      <div class = "events">
+        <h2 style = "color:#03dbfc">Tutoring in Computer Science</h2>
+        <h4 style="color:#027bd1">Service</h4>
+         <p style="color:red"><b>Year-round Opportunity</b></p>
+        <p>Members can earn service points by tutoring for AP Computer Science A, Computer Science Principles, and Intro to Programming.</p>
+        <p>If you want to tutor, or be tutored, you can <a href = "Forms.html"> access the forms here</a></p>
+      </div>
+      <div class = "events">
+        <h2 style = "color:#03dbfc">American Computer Science League</h2>
+        <h4 style="color:#027bd1">Participation</h4>
+         <p style="color:red"><b>Contest 3: March 17, Contest 4: March 24 - Both take place in SC3</b></p>
+        <p>The topics for Contest 3 will be Boolean Algebras, Data Structures, and FSA's and Regular Expressions.</p>
+        <p>The topics for Contest 4 will be Graph Theory, Digital Electronics, and Assembly Language.</p>
+        
+       
+        <p>Old Contests can be found in the schoology resources page for CSHS or on the<a href = "https://www.categories.acsl.org/wiki/index.php?title=Main_Page"> ACSL  </a> website.</p>
+        <p><b>You can earn 1 participation point for each contest.</b></p>
+      </div>
+      <div class = "events">
+        <h2 style = "color:#03dbfc">RU Secure</h2>
+        <h4 style="color:#027bd1">Participation</h4>
+         <p style="color:red"><b>Team Registration Due Friday, March 10</b></p>
+        <p><a href ="https://rusecurectf.radford.edu/"> RU Secure</a> is a Capture-the-Flag competition put on by Radford University
+</p>
+          <p>Form teams of 4-5 people. One member of each team should email Ms. Norris (lmnorris@henrico.k12.va.us) to register your team.
+</p>
+       
+      </div>
+  <div class = "events">
+        <h2 style = "color:#03dbfc">Programming Problem</h2>
+        <h4 style="color:#027bd1">Participation</h4>
+         <p style="color:red"><b>Due Friday, March 10</b></p>
+        <p>This month's problem is to create a program to brute force a <a href="https://brilliant.org/wiki/caesar-cipher/#:~:text=A%20Caesar%20cipher%20is%20a,an%20A%2C%20and%20so%20on.">Caesar Cipher.</a></p>
+    <p><b>You can earn 1 participation point for a working solution and 0.5 if sufficient effort was made. Do NOT cheat and get kicked out over 1 participation point.</b>
+        <p>Please sumbit the code<a href ="https://docs.google.com/forms/d/e/1FAIpQLSeyL4llf6d5hDuRgiTwK1Y5h9X6A2b94SHQWtxlxOGdby9dZg/viewform?usp=sf_link"> here.</a> 
+</p>
+
+       
+      </div>
+
+</section>
+<script src="script.js"></script>
+</body>
+</html>
