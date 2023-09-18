@@ -324,13 +324,14 @@ h3{
 }
 
 .profile {
-  flex-basis: 300px;
-  margin:0px 20px;
+  flex-basis: 250px;
+  margin: 0px 20px;
 }
 
 .profile .profile-img{
-  height: 350px;
-  width: 250px;
+  height: 400px;
+  width: 300px;
+  
 }
 
 .user-name {
@@ -339,17 +340,26 @@ h3{
 }
 
 .profile h5{
-  font-size: 18px;
+  font-size: 20px;
   Font-weight: 250;
   letter-spacing: 3px;
   color: #000000;
+  text-align:center;
 }
 
 .profile p{
   font-size: 16px;
   margin-top: 20px;
-  text-align: left;
+  text-align: center;
 }
+
+.profile .group-img{
+
+ height: 600px;
+  width: 500px;
+
+}
+
 /*Tutor page for mobile*/
 @media only screen and (max-width: 1350px) {
   .tutoring-col {
