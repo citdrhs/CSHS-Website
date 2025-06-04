@@ -27,7 +27,7 @@ jobs:
       - name: SCP deploy action
         uses: nogsantos/ssh-scp-deploy@v1.3.0
         with: 
-          src: /
+          src: ./*
           host: ${{ secrets.SSH_HOST }}
           remote: ${{ secrets.SSH_DIR }}
           port: ${{ secrets.SSH_PORT }}
