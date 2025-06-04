@@ -25,5 +25,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: deploy-to-staging
-      - run: echo "deploying"
+        run: echo "deploying"
         
