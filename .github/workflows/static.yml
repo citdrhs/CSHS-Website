@@ -24,13 +24,14 @@ jobs:
       name: STAGING
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4.2.2
       - name: SCP deploy action
-        uses: nogsantos/ssh-scp-deploy@v1.3.0
-        with: 
-          src: ./*
+        uses: appleboy/scp-action@v1
+        with:
           host: ${{ secrets.SSH_HOST }}
-          remote: ${{ secrets.SSH_DIR }}
-          port: ${{ secrets.SSH_PORT }}
-          user: ${{ secrets.SSH_USER }}
+          username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          source: "*"
+          target: ${{ secrets.SSH_DIR }}
         
