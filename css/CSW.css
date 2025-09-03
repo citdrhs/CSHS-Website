@@ -1,0 +1,27 @@
+.Filler {
+    font-size: 100px; /* makes text a lot larger */
+    font-weight: bold;
+    color: #09a6b4; /* Dodger blue, change if you want */
+    text-align: center;
+  
+    /* bounce animation */
+    display: inline-block;
+    animation: bounce 2s infinite;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  /* bounce keyframes */
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-15px);
+    }
+  }
+  
+  /* hover effect (slight scaling) */
+  .Filler:hover {
+    transform: scale(1.1);
+    animation-play-state: paused; /* pauses bounce on hover */
+  }

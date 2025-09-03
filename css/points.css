@@ -1,0 +1,175 @@
+
+
+/* Fade in/out effect - extra slow */
+.container,
+.rules-panel {
+  opacity: 0;
+  transform: translateY(20px); /* start slightly lower */
+  transition: opacity 5s ease-out, transform 5s ease-out; /* very slow fade and movement */
+}
+
+.container.visible,
+.rules-panel.visible {
+  opacity: 1;
+  transform: translateY(0); /* move into place */
+}
+
+
+
+
+/* Layout for both boxes side by side */
+
+.main-panels {
+  display: flex;
+  justify-content: center;
+  gap: 40px; /* space between login/result box and rules box */
+  margin-top: 30px;
+  flex-wrap: wrap; /* allows responsiveness */
+}
+
+/* Shared box styles (Login/Result + Rules) */
+.container,
+.rules-panel {
+  transition: all 0.3s ease-in-out;
+  transform: translateY(0);
+}
+
+/* Hover effect - lifting + glow */
+.container:hover,
+.rules-panel:hover {
+  transform: translateY(-8px); /* slight lift */
+  box-shadow: 0 10px 25px rgba(30, 60, 120, 0.4), 0 0 20px rgba(80, 150, 255, 0.3);
+}
+
+/* Login + Result container */
+.container {
+  width: 750px;
+  min-height: 400px;
+  background: #ffffff10;
+  backdrop-filter: blur(14px);
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0, 0, 50, 0.3);
+  display: flex;
+  overflow: hidden;
+}
+
+/* Left Panel (Login) */
+.left-panel {
+  flex: 1;
+  background: #1b3b6f;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.left-panel h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+form input {
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  background-color: #e8f0fe;
+  transition: 0.3s;
+}
+
+form input:focus {
+  outline: none;
+  background-color: #d0e1fd;
+  box-shadow: 0 0 5px #5a9dfd;
+}
+
+form button {
+  padding: 10px;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+form button:hover {
+  background-color: #357abf;
+  box-shadow: 0 4px 12px rgba(30, 100, 200, 0.5);
+  transform: scale(1.03);
+}
+
+/* Right Panel (Result) */
+.right-panel {
+  flex: 1;
+  background: #f4f9ff;
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 0 20px 20px 0;
+  overflow: hidden;
+}
+
+#result {
+  font-size: 18px;
+  color: #1b3b6f;
+  opacity: 0.9;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.right-panel:hover #result {
+  opacity: 1;
+  transform: translateY(-5px);
+}
+
+/* Rules Panel */
+.rules-panel {
+  width: 350px;
+  min-height: auto; /* allows dynamic height */
+  background: #f4f9ff;
+  backdrop-filter: blur(14px);
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0, 0, 50, 0.3);
+  padding: 30px;
+  color: #000000;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 15px;
+}
+
+.rules-panel h2 {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.rules-panel ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.rules-panel li {
+  font-size: 16px;
+  margin: 10px 0;
+  opacity: 0.9;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.rules-panel li:hover {
+  opacity: 1;
+  transform: translateX(5px);
+  color: #1b3b6f; /* subtle highlight color */
+}
