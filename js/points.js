@@ -18,9 +18,6 @@ const typewriterText = "Your Points";
   }
   
   const subtitles = [
-    "You're Points.",
-    "Yes",
-    "Yuppie",
     "Innovators. Leaders. Problem Solvers.",
     "Where Passion Meets Precision.",
     "Code with Excellence."
