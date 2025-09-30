@@ -1,30 +1,28 @@
-document.getElementById('menu-toggle').addEventListener('click', () => {
-  document.getElementById('nav-menu').classList.toggle('show');
-});
-
+// Typewriter Effect
 const typewriterText = "Previous Meeting Links";
 const typewriterElement = document.getElementById("typewriter");
 let index = 0;
 
 function typeWriter() {
+  if (!typewriterElement) return; // Prevent errors if element is missing
   if (index < typewriterText.length) {
-    typewriterElement.textContent += typewriterText.charAt(index);
+    typewriterElement.textContent = typewriterText.slice(0, index + 1);
     index++;
     setTimeout(typeWriter, 100);
   }
 }
 
+// Subtitle Cycling
 const subtitles = [
   "Look At the Past Meetings!",
   "In case you missed anything",
-  "Record Keeping!" 
-  
+  "Record Keeping!"
 ];
-
 let subtitleIndex = 0;
 const subtitleElement = document.getElementById("subtitle");
 
 function cycleSubtitles() {
+  if (!subtitleElement) return; // Prevent errors if element is missing
   subtitleElement.classList.remove("fade-in");
   setTimeout(() => {
     subtitleElement.textContent = subtitles[subtitleIndex];
@@ -33,52 +31,80 @@ function cycleSubtitles() {
   }, 500);
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  typeWriter();
-  cycleSubtitles();
-  setInterval(cycleSubtitles, 4000);
-});
+// Gallery Slide Navigation
+let currentSlide = 0;
+const slides = document.querySelectorAll('.gallery-item');
 
+function showSlide(index) {
+  slides.forEach((slide, i) => {
+    slide.style.display = i === index ? 'block' : 'none';
+  });
+}
 
+function nextSlide() {
+  currentSlide = (currentSlide + 1) % slides.length;
+  showSlide(currentSlide);
+}
 
+function prevSlide() {
+  currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+  showSlide(currentSlide);
+}
 
+// Menu Toggle
+const menuToggle = document.querySelector('.menu-toggle');
+const nav = document.getElementById('nav-menu');
 
-// NAVBAR
+function toggleMenu() {
+  if (nav) {
+    nav.classList.toggle('show');
+  }
+}
 
-const toggle = document.querySelector('.menu-toggle');
-const nav = document.querySelector('.nav');
-
-toggle.addEventListener('click', () => {
-  nav.classList.toggle('show');
-});
-
-
-// NAVBAR
-
-
-
-
-// ARROW CODE
-
-
-
+// Scroll Arrow
 const scrollArrow = document.getElementById('scroll-arrow');
 const heroSection = document.getElementById('hero');
 
-scrollArrow.addEventListener('click', () => {
-window.scrollBy({
-  top: window.innerHeight,
-  behavior: 'smooth'
-});
-});
+function handleScrollArrow() {
+  window.scrollBy({
+    top: window.innerHeight,
+    behavior: 'smooth'
+  });
+}
 
 const observer = new IntersectionObserver(entries => {
-entries.forEach(entry => {
-  scrollArrow.style.opacity = entry.isIntersecting ? '1' : '0';
-});
+  entries.forEach(entry => {
+    if (scrollArrow) {
+      scrollArrow.style.opacity = entry.isIntersecting ? '1' : '0';
+    }
+  });
 }, {
-root: null,
-threshold: 0.1
+  root: null,
+  threshold: 0.1
 });
 
-observer.observe(heroSection);
+// Initialize Everything
+document.addEventListener("DOMContentLoaded", () => {
+  // Typewriter
+  typeWriter();
+
+  // Subtitle Cycling
+  cycleSubtitles();
+  setInterval(cycleSubtitles, 4000);
+
+  // Gallery
+  showSlide(currentSlide);
+
+  // Menu Toggle
+  if (menuToggle) {
+    menuToggle.addEventListener('click', toggleMenu);
+  }
+
+  // Scroll Arrow
+  if (scrollArrow) {
+    scrollArrow.addEventListener('click', handleScrollArrow);
+  }
+  if (heroSection) {
+    observer.observe(heroSection);
+  }
+});

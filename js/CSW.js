@@ -1,85 +1,103 @@
-document.getElementById('menu-toggle').addEventListener('click', () => {
-    document.getElementById('nav-menu').classList.toggle('show');
-  });
-  
-  const typewriterText = "CS Wednesdays";
-  const typewriterElement = document.getElementById("typewriter");
-  let index = 0;
-  
-  function typeWriter() {
-    if (index < typewriterText.length) {
-      typewriterElement.textContent += typewriterText.charAt(index);
-      index++;
-      setTimeout(typeWriter, 100);
-    }
+// Typewriter Effect
+const typewriterText = "CS Wednesdays";
+const typewriterElement = document.getElementById("typewriter");
+let index = 0;
+
+function typeWriter() {
+  if (!typewriterElement) return;
+  if (index < typewriterText.length) {
+    typewriterElement.textContent = typewriterText.slice(0, index + 1);
+    index++;
+    setTimeout(typeWriter, 100);
   }
-  
-  const subtitles = [
-    "Hear new and intresting CS Topics",
-    "Student's presentations",
-    "Come Support your peers",
-    "Join us at the meetings!"
-    
-  ];
-  
-  let subtitleIndex = 0;
-  const subtitleElement = document.getElementById("subtitle");
-  
-  function cycleSubtitles() {
-    subtitleElement.classList.remove("fade-in");
-    setTimeout(() => {
-      subtitleElement.textContent = subtitles[subtitleIndex];
-      subtitleElement.classList.add("fade-in");
-      subtitleIndex = (subtitleIndex + 1) % subtitles.length;
-    }, 500);
-  }
-  
-  document.addEventListener("DOMContentLoaded", () => {
-    typeWriter();
-    cycleSubtitles();
-    setInterval(cycleSubtitles, 4000);
+}
+
+// Subtitle Cycling
+const subtitles = [
+  "Student Presentations.",
+  "Student innovation.",
+  "Led by Students for Students."
+];
+let subtitleIndex = 0;
+const subtitleElement = document.getElementById("subtitle");
+
+function cycleSubtitles() {
+  if (!subtitleElement) return;
+  subtitleElement.classList.remove("fade-in");
+  setTimeout(() => {
+    subtitleElement.textContent = subtitles[subtitleIndex];
+    subtitleElement.classList.add("fade-in");
+    subtitleIndex = (subtitleIndex + 1) % subtitles.length;
+  }, 500);
+}
+
+// Gallery Slide Navigation
+let currentSlide = 0;
+const slides = document.querySelectorAll('.gallery-item');
+
+function showSlide(index) {
+  slides.forEach((slide, i) => {
+    slide.style.display = i === index ? 'block' : 'none';
   });
-  
-  
+}
 
+function nextSlide() {
+  currentSlide = (currentSlide + 1) % slides.length;
+  showSlide(currentSlide);
+}
 
+function prevSlide() {
+  currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+  showSlide(currentSlide);
+}
 
-// NAVBAR
+// Menu Toggle
+const menuToggle = document.querySelector('.menu-toggle');
+const nav = document.getElementById('nav-menu');
 
-  const toggle = document.querySelector('.menu-toggle');
-  const nav = document.querySelector('.nav');
-  
-  toggle.addEventListener('click', () => {
+function toggleMenu() {
+  if (nav) {
     nav.classList.toggle('show');
-  });
-  
+  }
+}
 
-// NAVBAR
-
-
-
-
-  // ARROW CODE
-
-
-
-  const scrollArrow = document.getElementById('scroll-arrow');
+// Scroll Arrow
+const scrollArrow = document.getElementById('scroll-arrow');
 const heroSection = document.getElementById('hero');
 
-scrollArrow.addEventListener('click', () => {
+function handleScrollArrow() {
   window.scrollBy({
     top: window.innerHeight,
     behavior: 'smooth'
   });
-});
+}
 
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
-    scrollArrow.style.opacity = entry.isIntersecting ? '1' : '0';
+    if (scrollArrow) {
+      scrollArrow.style.opacity = entry.isIntersecting ? '1' : '0';
+    }
   });
 }, {
   root: null,
   threshold: 0.1
 });
 
-observer.observe(heroSection);
+// Initialize Everything
+document.addEventListener("DOMContentLoaded", () => {
+  typeWriter();
+  cycleSubtitles();
+  setInterval(cycleSubtitles, 4000);
+  showSlide(currentSlide);
+
+  if (menuToggle) {
+    menuToggle.addEventListener('click', toggleMenu);
+  }
+
+  if (scrollArrow) {
+    scrollArrow.addEventListener('click', handleScrollArrow);
+  }
+  if (heroSection) {
+    observer.observe(heroSection);
+  }
+});
