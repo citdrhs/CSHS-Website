@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>CS Wednesdays signup</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{color-scheme:dark;font-family:Poppins,sans-serif;color:#f4f6fa;background:#080a0e;font-size:15px}
+    *{box-sizing:border-box}body{margin:0;padding:24px}h1,h2,h3,p{margin:0}h1{font-size:clamp(24px,4vw,36px);font-weight:600}h2{font-size:22px}h3{font-size:17px}
+    a{color:#accaff}p{line-height:1.7;color:#bdc7d9}.eyebrow{color:#9fbcff;text-transform:uppercase;letter-spacing:.15em;font-size:11px;font-weight:600;margin-bottom:8px}
+    .intro{display:flex;justify-content:space-between;gap:20px;align-items:center;margin-bottom:24px}.intro p{margin-top:8px}.badge{white-space:nowrap;border:1px solid #425172;border-radius:30px;padding:8px 15px;color:#d7e4ff;font-size:12px}
+    .layout{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:24px}.panel{border:1px solid #2d3543;background:#11151d;border-radius:12px;padding:24px}
+    .toolbar{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:18px 0}.toolbar h3{font-size:18px}.navbuttons{display:flex;gap:8px}
+    button,input,textarea{font:inherit}button{border:1px solid #44526a;color:#f6f8ff;background:#1c2534;border-radius:8px;padding:10px 14px;cursor:pointer;font-weight:500}button:hover:not(:disabled){background:#2b3950}button:disabled{opacity:.5;cursor:not-allowed}button:focus-visible,a:focus-visible{outline:3px solid #ffb54d;outline-offset:3px}
+    .calendar{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px}.weekday{font-size:11px;color:#adb9ce;text-align:center;padding:6px 0}.day{min-height:62px;text-align:center;border-radius:8px;font-size:13px;padding:8px 2px;border:1px solid transparent}.day small{display:block;font-size:9px;margin-top:4px;line-height:1.2}.ordinary{color:#6f7a8e}.available{background:#132e28;border-color:#35866e;color:#b0f3d4}.booked{background:#202e49;border-color:#4769a0;color:#c6d9ff}.closed,.blocked{background:#252329;border-color:#494451;color:#c8beca}.past{color:#707b8e}.selected{outline:2px solid #ffb54d;outline-offset:1px}
+    .legend{display:flex;flex-wrap:wrap;gap:14px;font-size:11px;color:#bdc7d9;margin:18px 0}.legend span:before{content:'';display:inline-block;width:8px;height:8px;border-radius:50%;background:#35866e;margin-right:6px}.legend .taken:before{background:#628ccc}.legend .off:before{background:#827587}
+    .note{font-size:12px;margin-top:14px}.notice{border-left:3px solid #ffb54d;background:#282115;padding:12px 16px;color:#ffe1ae;border-radius:4px;margin:0 0 20px;line-height:1.65;font-size:13px}.notice[hidden],[hidden]{display:none!important}
+    label{display:block;font-size:13px;font-weight:500;margin:15px 0 6px}input,textarea{width:100%;border:1px solid #45516a;border-radius:6px;padding:11px;background:#090d14;color:#fff}input:focus,textarea:focus{outline:2px solid #78aaff;outline-offset:1px}input[readonly]{color:#aacaef}textarea{resize:vertical;min-height:95px}.inline{display:flex;gap:8px;align-items:center}.inline input{min-width:0}.inline button{flex-shrink:0}.primary{background:#5080da;border-color:#6e97e4;color:white}.primary:hover:not(:disabled){background:#386bc3}.wide{width:100%;margin-top:18px}.check{display:flex;gap:9px;align-items:flex-start;font-weight:400;font-size:12px;line-height:1.6}.check input{width:18px;flex-shrink:0;margin-top:3px}
+    .status{white-space:pre-line;font-size:13px;line-height:1.6;padding:12px 0;color:#ffde9c}.status:empty{padding:0}.summary{border-top:1px solid #30394b;padding-top:15px;margin-top:18px}.booking{padding:14px 0;border-bottom:1px solid #30394b;display:flex;gap:12px;justify-content:space-between;align-items:center}.booking small{display:block;color:#c5d0e4}.actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:18px;font-size:12px}.steps{display:flex;gap:20px;color:#c8d5ea;font-size:12px;margin-bottom:18px}.steps b{color:#ffb54d;margin-right:5px}
+    @media(max-width:760px){body{padding:12px}.layout{grid-template-columns:1fr}.panel{padding:18px}.intro{align-items:flex-start}.badge{display:none}.day{min-height:55px}.steps{gap:10px;font-size:11px}}
+    @media(max-width:400px){.calendar{gap:3px}.day small{font-size:8px;letter-spacing:-.2px;overflow-wrap:anywhere}}
+    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+  </style>
+</head>
+<body>
+  <div class="intro"><div><p class="eyebrow">Student presentations · Wednesday lunch</p><h1>Bring an idea. Lead a session.</h1><p>Choose a school Wednesday and reserve it for your presentation or workshop.</p></div><span class="badge" id="year">CS Wednesdays</span></div>
+  <div class="steps"><span><b>01</b>Pick a date</span><span><b>02</b>Verify school email</span><span><b>03</b>Reserve lunch</span></div>
+  <div class="notice" id="preview" hidden>Preview only — Google Calendar is not connected. Dates below follow the HCPS school calendar, but actual booking availability is unverified. Nothing submitted here will be saved.</div>
+  <div class="status" id="load-status" role="status" aria-live="polite">Loading current availability…</div>
+  <div class="layout">
+    <section class="panel" aria-labelledby="calendar-heading">
+      <p class="eyebrow">Find your Wednesday</p><h2 id="calendar-heading">Lunch availability</h2><p class="note" id="session-info">Loading schedule…</p>
+      <div class="toolbar"><h3 id="month" aria-live="polite"></h3><div class="navbuttons"><button type="button" id="prev" aria-label="Previous month">←</button><button type="button" id="next" aria-label="Next month">→</button></div></div>
+      <div class="calendar" id="calendar" aria-label="Wednesday lunch calendar"></div>
+      <div class="legend"><span id="available-legend">Available</span><span class="taken">Reserved</span><span class="off">No session / unavailable</span></div>
+      <p class="note" id="date-info">Select a Wednesday for details. Non-Wednesdays are not bookable.</p>
+      <div class="actions"><button type="button" id="refresh">Refresh availability</button><a id="google-calendar" target="_blank" rel="noopener" hidden>View Google Calendar ↗</a></div>
+      <p class="note">School breaks and half-days are excluded. Unexpected closures are updated by officers. <a id="source" target="_blank" rel="noopener">HCPS calendar ↗</a></p>
+      <section class="summary" id="my-section" hidden><h3>Your upcoming reservations</h3><div id="my-bookings"></div></section>
+    </section>
+    <section class="panel" aria-labelledby="form-heading">
+      <p class="eyebrow">One presenting group per date</p><h2 id="form-heading">Host a CS Wednesday</h2>
+      <form id="signup">
+        <label for="date">Selected Wednesday</label><input id="date" name="date" placeholder="Choose a date on the calendar" readonly required>
+        <label for="email">School email</label><div class="inline"><input id="email" type="email" autocomplete="email" placeholder="you@henricostudents.org" maxlength="120" required><button type="button" id="send-code">Send code</button></div>
+        <div id="verify-area" hidden><label for="code">6-digit verification code</label><div class="inline"><input id="code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]{6}"><button type="button" id="verify">Verify</button></div></div>
+        <p class="note" id="verification">Verification keeps other people from reserving a date using your email.</p>
+        <label for="name">Presenter name(s) / group</label><input id="name" autocomplete="name" maxlength="100" required>
+        <label for="topic">Session topic</label><input id="topic" maxlength="120" placeholder="e.g. Build your first game in Python" required>
+        <label for="details">What will you teach or do?</label><textarea id="details" maxlength="600" placeholder="A short outline, plus any equipment or setup you need." required></textarea>
+        <label class="check"><input type="checkbox" id="agree" required><span>I can host during this lunch period and will cancel if my plans change. My contact details and session notes are for organizers only.</span></label>
+        <button type="submit" class="primary wide" id="reserve" disabled>Verify email to reserve</button>
+      </form>
+      <form id="edit-form" class="summary" hidden>
+        <h3>Edit your reservation</h3><p class="note" id="edit-date"></p>
+        <label for="edit-name">Presenter name(s) / group</label><input id="edit-name" maxlength="100" required>
+        <label for="edit-topic">Session topic</label><input id="edit-topic" maxlength="120" required>
+        <label for="edit-details">Session outline / equipment</label><textarea id="edit-details" maxlength="600" required></textarea>
+        <p class="note">Your date stays reserved while you edit. To move dates, cancel and reserve another available Wednesday.</p>
+        <div class="actions"><button type="submit" id="save-edit">Save changes</button><button type="button" id="discard-edit">Discard changes</button></div>
+      </form>
+      <div class="status" id="message" role="status" aria-live="polite"></div>
+      <p class="note">A calendar invitation goes to the verified school email after signup. Email reminders arrive the day before and about an hour before lunch (for bookings made before those reminder times).</p>
+      <p class="note">Two upcoming reservations per school email. No student names, emails or session notes are published to the shared calendar.</p>
+      <p class="note" id="contact">Need to change a session? Verify your email to edit or cancel your reservations.</p>
+    </section>
+  </div>
+  <script>
+  (() => {
+    const $ = id => document.getElementById(id);
+    const live = !!(window.google && google.script && google.script.run);
+    let model, month, chosen = '', token = '', busy = false, loading = false;
+    let requestId = crypto.randomUUID(), editing = '';
+    const pretty = d => new Date(d + 'T12:00:00Z').toLocaleDateString('en-US', {timeZone:'UTC',weekday:'short',month:'long',day:'numeric',year:'numeric'});
+    const rpc = (name, ...args) => new Promise((resolve, reject) => {
+      if (!live) return reject(new Error('This is a preview. No information has been sent.'));
+      google.script.run.withSuccessHandler(resolve).withFailureHandler(reject)[name](...args);
+    });
+    function message(text) { $('message').textContent = text; }
+    function controls() {
+      const valid = model && model.slots.some(s => s.date === chosen && s.status === 'available');
+      $('reserve').disabled = !live || !token || !valid || busy || loading;
+      $('reserve').textContent = !live ? 'Preview — signup not connected' : busy ? 'Working…' : !token ? 'Verify email to reserve' : !valid ? 'Choose an available date' : 'Reserve this Wednesday';
+      $('send-code').disabled = !live || busy || !!token;
+      $('verify').disabled = busy;
+      $('save-edit').disabled = busy || !token;
+    }
+    function choose(slot, focus) {
+      chosen = slot.status === 'available' || slot.status === 'preview' ? slot.date : '';
+      $('date').value = chosen ? pretty(chosen) : '';
+      $('date-info').textContent = pretty(slot.date) + ' · ' + slot.label;
+      requestId = crypto.randomUUID(); render(); controls();
+      if (focus && chosen) $('date').focus();
+    }
+    function render() {
+      if (!model) return;
+      $('month').textContent = new Date(month + '-01T12:00:00Z').toLocaleDateString('en-US',{month:'long',year:'numeric',timeZone:'UTC'});
+      $('prev').disabled = month <= model.slots[0].date.slice(0,7);
+      $('next').disabled = month >= model.slots[model.slots.length - 1].date.slice(0,7);
+      const grid = $('calendar'); grid.replaceChildren();
+      for (const label of ['Sun','Mon','Tue','Wed','Thu','Fri','Sat']) { const el=document.createElement('div');el.className='weekday';el.textContent=label;grid.append(el); }
+      const first = new Date(month + '-01T12:00:00Z');
+      for(let i=0;i<first.getUTCDay();i++) grid.append(document.createElement('div'));
+      const days = new Date(Date.UTC(first.getUTCFullYear(),first.getUTCMonth()+1,0)).getUTCDate();
+      for(let n=1;n<=days;n++) {
+        const key=month+'-'+String(n).padStart(2,'0'), slot=model.slots.find(s=>s.date===key);
+        const el=document.createElement(slot?'button':'div');el.className='day '+(slot?slot.status==='preview'?'available':slot.status:'ordinary')+(key===chosen?' selected':'');
+        el.textContent=n;
+        if(slot) {
+          el.type='button';el.setAttribute('aria-label',pretty(key)+': '+slot.label);el.setAttribute('aria-pressed',String(key===chosen));
+          const small=document.createElement('small');small.textContent=({available:'Open',booked:'Reserved',closed:'No session',blocked:'Unavailable',past:'Past',preview:'Preview'})[slot.status];el.append(small);
+          el.addEventListener('click',()=>choose(slot,true));
+        }
+        grid.append(el);
+      }
+    }
+    async function previewModel() {
+      const response=await fetch('../data/csw-schedule.json');if(!response.ok)throw new Error('Could not load the school schedule.');
+      const s=await response.json(),slots=[],today=new Intl.DateTimeFormat('en-CA',{timeZone:s.timezone}).format(new Date());
+      for(let d=new Date(s.firstDay+'T12:00:00Z');d.toISOString().slice(0,10)<=s.lastDay;d.setUTCDate(d.getUTCDate()+1)) {
+        if(d.getUTCDay()!==3)continue;const date=d.toISOString().slice(0,10),reason=s.closed[date]||s.review[date];
+        slots.push({date,status:reason?'closed':date<today?'past':'preview',label:reason||(date<today?'Past session':'School Wednesday — availability unverified')});
+      }
+      return {schoolYear:s.schoolYear,slots,source:s.source};
+    }
+    async function refresh() {
+      if(loading)return;loading=true;controls();$('refresh').disabled=true;
+      try {
+        model=live?await rpc('getAvailability'):await previewModel();
+        const today=new Intl.DateTimeFormat('en-CA',{timeZone:'America/New_York'}).format(new Date());
+        if(!month)month=(model.slots.find(s=>s.date>=today)||model.slots[model.slots.length-1]).date.slice(0,7);
+        $('year').textContent=model.schoolYear;
+        $('source').href=model.source;
+        $('session-info').textContent=live?model.start+'–'+model.end+' · '+model.room+' · Eastern time':'Lunch time and room awaiting officer confirmation.';
+        if(live){$('google-calendar').hidden=false;$('google-calendar').href=model.calendarUrl;$('contact').textContent='Questions or changes: '+model.contact;}
+        $('load-status').textContent=live?'Updated '+new Date().toLocaleTimeString([], {hour:'numeric',minute:'2-digit'})+' · availability is checked again when you reserve.':'';
+        if(chosen&&!model.slots.some(s=>s.date===chosen&&['available','preview'].includes(s.status))){chosen='';$('date').value='';message('Your selected date is no longer available. Please choose another.');}
+        render();
+      }catch(e){model=null;chosen='';$('date').value='';$('calendar').replaceChildren();$('load-status').textContent='Could not verify availability. '+e.message+' Use Refresh to retry.';}
+      finally{loading=false;$('refresh').disabled=false;controls();}
+    }
+    async function action(fn){if(busy)return;busy=true;controls();try{await fn();}catch(e){message(e.message);if(/Verification expired|Verify your school email first/.test(e.message)){token='';$('email').readOnly=false;$('verify-area').hidden=true;$('verification').textContent='Verification expired. Send a new code to continue.';}}finally{busy=false;controls();}}
+    async function mine(){
+      const rows=await rpc('myBookings',token);$('my-section').hidden=false;$('my-bookings').replaceChildren();
+      if(!rows.length){$('my-bookings').textContent='No upcoming reservations.';return;}
+      rows.forEach(r=>{const row=document.createElement('div');row.className='booking';const text=document.createElement('div');text.textContent=pretty(r.date);const small=document.createElement('small');small.textContent=r.topic+(r.syncPending?' · Calendar sync pending':'');text.append(small);const cancel=document.createElement('button');cancel.type='button';cancel.textContent='Cancel';cancel.addEventListener('click',()=>{if(confirm('Cancel your reservation for '+pretty(r.date)+'?'))action(async()=>{const result=await rpc('cancelBooking',token,r.id);message((result.synced?'Reservation cancelled. The date can be reserved again.':'Reservation cancelled. Calendar update pending; contact an officer if it persists.')+(result.invited?' The calendar invitation has been cancelled.':' The invitation cancellation is pending.'));await refresh();await mine();});});const edit=document.createElement('button');edit.type='button';edit.textContent='Edit';edit.dataset.editId=r.id;row.append(text,edit,cancel);$('my-bookings').append(row);});
+    }
+    $('send-code').addEventListener('click',()=>action(async()=>{if(!$('email').reportValidity())return;const r=await rpc('requestCode',$('email').value);$('verify-area').hidden=false;message(r.message);$('code').focus();}));
+    $('my-bookings').addEventListener('click',e=>{
+      const button=e.target.closest('[data-edit-id]');if(!button||busy)return;
+      action(async()=>{
+        const rows=await rpc('myBookings',token),r=rows.find(r=>r.id===button.dataset.editId);
+        if(!r)throw new Error('Reservation is no longer available to edit.');
+        editing=r.id;$('edit-date').textContent=pretty(r.date);
+        for(const key of ['name','topic','details'])$('edit-'+key).value=r[key];
+        $('edit-form').hidden=false;$('edit-name').focus();
+      });
+    });
+    $('discard-edit').addEventListener('click',()=>{editing='';$('edit-form').hidden=true;});
+    $('edit-form').addEventListener('submit',e=>{e.preventDefault();action(async()=>{
+      if(!$('edit-form').reportValidity()||!editing)return;
+      const r=await rpc('editBooking',{token,id:editing,name:$('edit-name').value,topic:$('edit-topic').value,details:$('edit-details').value});
+      editing='';$('edit-form').hidden=true;
+      message('Changes saved. Your date is still reserved.'+(r.invited?' Your calendar invitation is up to date.':' Calendar invitation update pending.'));
+      await mine();
+    });});
+    $('verify').addEventListener('click',()=>action(async()=>{const r=await rpc('verifyCode',$('email').value,$('code').value);token=r.token;$('email').readOnly=true;$('verify-area').hidden=true;$('verification').textContent='School email verified for 30 minutes. Refresh this page to use another account.';message('Verified. Choose a date and tell us about your session.');await mine();}));
+    $('signup').addEventListener('submit',e=>{e.preventDefault();action(async()=>{
+      if(!$('signup').reportValidity()||!chosen)return;
+      const r=await rpc('bookSlot',{token,date:chosen,name:$('name').value,topic:$('topic').value,details:$('details').value,agree:$('agree').checked,requestId});
+      chosen='';$('date').value='';
+      message('Reserved for '+pretty(r.date)+'.\n'+(r.synced?'Google Calendar is updated.':'Your spot is saved, but the calendar update is pending. Please contact an officer if it persists.')+'\n'+(r.invited?'Check your school email for the calendar invitation.':'Your invitation is pending and will retry automatically.')+'\nReference: '+r.id);
+      requestId=crypto.randomUUID();await refresh();await mine();
+    });});
+    $('prev').addEventListener('click',()=>move(-1));$('next').addEventListener('click',()=>move(1));
+    function move(delta){const d=new Date(month+'-01T12:00:00Z');d.setUTCMonth(d.getUTCMonth()+delta);month=d.toISOString().slice(0,7);render();}
+    $('refresh').addEventListener('click',refresh);
+    if(!live){$('preview').hidden=false;$('available-legend').textContent='School day · preview';}
+    function prefill(value){const s=model&&model.slots.find(s=>s.date===value);if(s){month=s.date.slice(0,7);choose(s,false);}else if(value)message('That date is outside this school year. Please choose a listed Wednesday.');}
+    function locationReady(params){
+      prefill(params.date);
+      if(/^[a-zA-Z0-9-]{36}$/.test(params.embedId || '')) {
+        // The nonce ties height-only messages to this iframe instance; no form data leaves the frame.
+        const sendHeight=()=>window.top.postMessage({type:'csw:resize',embedId:params.embedId,height:Math.ceil(document.body.getBoundingClientRect().height)+12},'*');
+        new ResizeObserver(sendHeight).observe(document.body);sendHeight();
+      }
+    }
+    refresh().then(()=>{if(live)google.script.url.getLocation(loc=>locationReady(loc.parameter));else locationReady(Object.fromEntries(new URLSearchParams(location.search)));});
+    // Refresh shared availability while idle, without resetting in-progress form fields.
+    setInterval(()=>{if(live&&!busy&&!document.hidden)refresh();},120000);
+  })();
+  </script>
+</body>
+</html>
