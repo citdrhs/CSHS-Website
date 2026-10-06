@@ -1,92 +1,100 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+    <title>Computer Science Honor Society</title>
+    <link rel="stylesheet" href="../css/index.css" />
+    <link rel="stylesheet" href="../css/CSW.css" />
+    <link rel="stylesheet" href="../css/booking-embed.css" />
+    <script defer src="../js/CSW.js"></script>
+    <script defer src="../js/csw-booking-config.js?v=20261005"></script>
+    <script defer src="../js/csw-booking-embed.js?v=20261005-admin"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="icon" type="image/x-icon" href="/images/../images/CSHSlogo.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-  <title>Computer Science Honor Society</title>
-  <link rel="stylesheet" href="../css/index.css">
-  <link rel="stylesheet" href="../css/CSW.css">
-  <script defer src="../js/CSW.js"></script>
-  <script defer src="../js/csw-booking-config.js"></script>
-  <script defer src="../js/csw-booking-embed.js"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="icon" type="image/x-icon" href="/images/../images/CSHSlogo.png">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-</head>
+  <!--HERO START-->
+  <body>
+    <header class="header">
+      <div class="logo">
+        <img src="../images/CSHSlogo.png" alt="Logo" />
+      </div>
+      <button class="menu-toggle" id="menu-toggle">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+      <nav class="nav" id="nav-menu">
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="calendar.html">Calendar</a></li>
+          <li><a href="points.html">View Points</a></li>
+          <li><a href="previous.html">Previous Meetings</a></li>
+          <li><a href="CSW.html">CS Wednesdays</a></li>
+          <li><a href="media.html">Media</a></li>
+        </ul>
+      </nav>
+    </header>
 
-
-
-
-
-
-
-<!--HERO START-->
-<body>
-  <header class="header">
-    <div class="logo">
-      <img src="../images/CSHSlogo.png" alt="Logo" />
-    </div>
-    <button class="menu-toggle" id="menu-toggle">
-      <span class="bar"></span>
-      <span class="bar"></span>
-      <span class="bar"></span>
-    </button>
-    <nav class="nav" id="nav-menu">
-      <ul>
-        <li><a href="../index.html">Home</a></li>  
-        <li><a href="about.html">About Us</a></li>
-        <li><a href="calendar.html">Calendar</a></li>
-        <li><a href="points.html">View Points</a></li>
-        <li><a href="previous.html">Previous Meetings</a></li>
-        <li><a href="CSW.html">CS Wednesdays</a></li>
-        <li><a href="media.html">Media</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <main class="hero" id="hero">
-    <video autoplay muted loop playsinline class="background-video">
-      <source src="../images/CSHSbk.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-    <div class="hero-content">
-    <h1 id="typewriter"></h1>
-    <center><p id="subtitle"></p></center>
-    </div>
-    <br>
-    <br>
-    <div id="scroll-arrow">&#x25BC;</div>   
-  </main>
-<!--HERO END CONTENT START-->
+    <main class="hero" id="hero">
+      <video autoplay muted loop playsinline class="background-video">
+        <source src="../images/CSHSbk.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+      <div class="hero-content">
+        <h1 id="typewriter"></h1>
+        <center><p id="subtitle"></p></center>
+      </div>
+      <br />
+      <br />
+      <div id="scroll-arrow">&#x25BC;</div>
+    </main>
+    <!--HERO END CONTENT START-->
     <section class="booking-section" id="signup" aria-label="CS Wednesday lunch signup">
-      <p class="setup-notice" id="csw-setup-notice">Signup preview — calendar connection is being set up. No reservations are being accepted yet.</p>
-      <iframe id="csw-booking" title="Choose a CS Wednesday and reserve lunch" loading="lazy"></iframe>
-      <p class="booking-fallback"><a id="csw-open-form" target="_blank" rel="noopener">Open signup in a separate tab</a></p>
-      <noscript>Please enable JavaScript to see the signup calendar. Contact a CSHS officer for help.</noscript>
+      <div class="setup-notice" id="csw-setup-notice" role="status" aria-live="polite">
+        <img class="loading-logo" src="../images/CSHSlogo.png" alt="Loading signup" />
+      </div>
+      <iframe id="csw-booking" title="Choose a CS Wednesday and reserve lunch"></iframe>
+      <p class="booking-fallback">
+        <a id="csw-open-form" target="_blank" rel="noopener">Open signup in a separate tab</a>
+      </p>
+      <noscript>
+        Please enable JavaScript to see the signup calendar. Contact a CSHS officer for help.
+      </noscript>
     </section>
     <section class="cs-wednesday" id="cs-wednesday">
       <div class="cs-wednesday-container">
         <div class="gallery-section">
           <h2>Previous CS Wednesdays</h2>
-          <br>
+          <br />
           <div class="gallery-grid">
             <div class="gallery-item">
-              <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vRhoZnlY7aU9bgNu1VCBHh7x3FU6XnjhQpWqfIVsTUrNvzp8ZSQ1BO2YyyB-_mDWQ/pubembed?" title="Previous CS Wednesday presentation" loading="lazy" allowfullscreen></iframe>
+              <iframe
+                src="https://docs.google.com/presentation/d/e/2PACX-1vRhoZnlY7aU9bgNu1VCBHh7x3FU6XnjhQpWqfIVsTUrNvzp8ZSQ1BO2YyyB-_mDWQ/pubembed?"
+                title="Previous CS Wednesday presentation"
+                loading="lazy"
+                allowfullscreen
+              ></iframe>
             </div>
           </div>
-
         </div>
       </div>
     </section>
 
-   <br><br>
-   <br><br>
-   <br><br>
- 
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
 
     <footer>
       <div class="socials">
@@ -97,8 +105,4 @@
       </div>
     </footer>
   </body>
-  
-
-
-
 </html>

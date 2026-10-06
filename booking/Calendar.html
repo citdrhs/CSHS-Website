@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>CSHS Calendar</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 24px;
+        background: #10151f;
+        color: #f4f6fa;
+        font:
+          16px Arial,
+          sans-serif;
+      }
+      button,
+      a {
+        font: inherit;
+      }
+      button {
+        cursor: pointer;
+        color: inherit;
+        background: #1e2d45;
+        border: 1px solid #53647d;
+        border-radius: 8px;
+        padding: 10px 14px;
+      }
+      button:disabled {
+        opacity: 0.5;
+        cursor: default;
+      }
+      button:focus-visible,
+      a:focus-visible {
+        outline: 3px solid #ffd479;
+        outline-offset: 2px;
+      }
+      header {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      h1 {
+        font-size: 24px;
+        margin: 0 auto 0 0;
+      }
+      h2 {
+        font-size: 20px;
+      }
+      p {
+        line-height: 1.5;
+      }
+      a {
+        color: #accaff;
+      }
+      #status {
+        min-height: 24px;
+        color: #c7d4e9;
+      }
+      #loading {
+        width: 56px;
+        height: 56px;
+        object-fit: contain;
+        animation: pulse 1s ease-in-out infinite alternate;
+      }
+      #grid {
+        display: grid;
+        grid-template-columns: repeat(7, minmax(0, 1fr));
+        gap: 6px;
+      }
+      .weekday {
+        text-align: center;
+        padding: 8px 0;
+        color: #bdc8da;
+      }
+      .day {
+        min-height: 96px;
+        padding: 10px;
+        text-align: left;
+        background: #192232;
+        border: 1px solid #344259;
+        border-radius: 8px;
+      }
+      .day small {
+        display: block;
+        margin-top: 8px;
+        line-height: 1.3;
+        font-size: 13px;
+        overflow-wrap: anywhere;
+      }
+      .meeting {
+        border-color: #c4a5ff;
+      }
+      .available {
+        border-color: #68cbb1;
+      }
+      .pending,
+      .booked {
+        border-color: #80afff;
+      }
+      .selected {
+        box-shadow: inset 0 0 0 2px #ffd479;
+      }
+      #details {
+        margin-top: 20px;
+        padding: 4px 18px;
+        border-left: 3px solid #80afff;
+      }
+      #details p {
+        white-space: pre-line;
+        overflow-wrap: anywhere;
+      }
+      #legend {
+        color: #c7d4e9;
+      }
+      @keyframes pulse {
+        to {
+          opacity: 0.35;
+          transform: scale(0.92);
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        #loading {
+          animation: none;
+        }
+      }
+      @media (max-width: 600px) {
+        body {
+          padding: 12px;
+          font-size: 14px;
+        }
+        #grid {
+          gap: 3px;
+        }
+        .day {
+          min-height: 78px;
+          padding: 5px;
+        }
+        .day small {
+          font-size: 11px;
+          overflow-wrap: anywhere;
+        }
+        h1 {
+          width: 100%;
+          font-size: 22px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1 id="month">CSHS Calendar</h1>
+      <button id="prev" aria-label="Previous month" disabled>←</button>
+      <button id="next" aria-label="Next month" disabled>→</button>
+      <button id="refresh">Refresh</button>
+    </header>
+    <p id="legend">Club meetings and CS Wednesdays · Eastern time</p>
+    <p>
+      <a
+        id="manage"
+        href="https://drhscit.org/cshs/html/CSW.html?manage=1#organizer"
+        target="_blank"
+        rel="noopener"
+      >
+        Manage calendar
+      </a>
+      · Organizers: verify your school email on the signup page.
+    </p>
+    <img id="loading" src="https://drhscit.org/cshs/images/CSHSlogo.png" alt="Loading calendar" />
+    <p id="status" role="status" aria-live="polite"></p>
+    <div id="grid" aria-label="CSHS dates"></div>
+    <section id="details" aria-live="polite"></section>
+    <script>
+      const $ = (id) => document.getElementById(id);
+      let model,
+        month,
+        selected = '',
+        busy = false,
+        embedId = '';
+      const live = !!(window.google && google.script && google.script.run);
+      const pretty = (date) =>
+        new Date(date + 'T12:00:00Z').toLocaleDateString('en-US', {
+          weekday: 'long',
+          month: 'long',
+          day: 'numeric',
+          timeZone: 'UTC'
+        });
+      const time = (date) =>
+        new Date(date).toLocaleTimeString('en-US', {
+          hour: 'numeric',
+          minute: '2-digit',
+          timeZone: 'America/New_York'
+        });
+
+      // Empty past dates and school closures do not need calendar labels.
+      function visibleSlot(date) {
+        return model.slots.find(
+          (slot) =>
+            slot.date === date &&
+            (slot.status === 'available' ||
+              slot.status === 'booked' ||
+              slot.status === 'pending' ||
+              (slot.status === 'past' && slot.topic))
+        );
+      }
+
+      function showDate(date) {
+        selected = date;
+        const details = $('details');
+        details.replaceChildren();
+        const title = document.createElement('h2');
+        title.textContent = pretty(date);
+        details.append(title);
+        for (const meeting of model.meetings.filter((item) => item.date === date)) {
+          const p = document.createElement('p');
+          p.textContent =
+            meeting.title +
+            '\n' +
+            (meeting.allDay ? 'All day' : time(meeting.start) + '–' + time(meeting.end)) +
+            (meeting.room ? '\n' + meeting.room : '');
+          details.append(p);
+        }
+        const slot = visibleSlot(date);
+        if (slot) {
+          const p = document.createElement('p');
+          p.textContent =
+            'CS Wednesday · A lunch · ' +
+            model.start +
+            '–' +
+            model.end +
+            ' · ' +
+            model.room +
+            '\n' +
+            (slot.topic
+              ? slot.name + '\n' + slot.topic
+              : slot.status === 'pending'
+                ? 'Awaiting approval'
+                : 'Open Slot');
+          details.append(p);
+          if (slot.status === 'available') {
+            const link = document.createElement('a');
+            link.textContent = 'Sign up for this Wednesday';
+            link.href = 'https://drhscit.org/cshs/html/CSW.html?date=' + date + '#signup';
+            link.target = '_blank';
+            link.rel = 'noopener';
+            link.addEventListener('click', (event) => {
+              if (!embedId) return;
+              event.preventDefault();
+              window.top.postMessage({ type: 'csw:date', embedId, date }, '*');
+            });
+            details.append(link);
+          }
+        }
+        render();
+      }
+
+      function render() {
+        const first = new Date(month + '-01T12:00:00Z');
+        $('month').textContent = first.toLocaleDateString('en-US', {
+          month: 'long',
+          year: 'numeric',
+          timeZone: 'UTC'
+        });
+        $('prev').disabled = month <= model.slots[0].date.slice(0, 7);
+        $('next').disabled = month >= model.slots[model.slots.length - 1].date.slice(0, 7);
+        const grid = $('grid');
+        grid.replaceChildren();
+        for (const name of ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']) {
+          const label = document.createElement('div');
+          label.className = 'weekday';
+          label.textContent = name;
+          grid.append(label);
+        }
+        for (let i = 0; i < first.getUTCDay(); i++) grid.append(document.createElement('div'));
+        const days = new Date(
+          Date.UTC(first.getUTCFullYear(), first.getUTCMonth() + 1, 0)
+        ).getUTCDate();
+        for (let day = 1; day <= days; day++) {
+          const date = month + '-' + String(day).padStart(2, '0');
+          const slot = visibleSlot(date);
+          const meetings = model.meetings.filter((item) => item.date === date);
+          const cell = document.createElement(slot || meetings.length ? 'button' : 'div');
+          cell.className =
+            'day ' +
+            (slot ? slot.status : '') +
+            (meetings.length ? ' meeting' : '') +
+            (selected === date ? ' selected' : '');
+          cell.textContent = day;
+          const labels = meetings.map(() => 'CSHS Club Meeting · Auditorium');
+          if (slot)
+            labels.push(
+              'CS Wednesday · ' +
+                (slot.topic || (slot.status === 'pending' ? 'Awaiting approval' : 'Open Slot'))
+            );
+          for (const text of labels) {
+            const label = document.createElement('small');
+            label.textContent = text;
+            cell.append(label);
+          }
+          if (slot || meetings.length) {
+            cell.setAttribute('aria-label', pretty(date) + ': ' + labels.join(', '));
+            cell.setAttribute('aria-pressed', String(selected === date));
+            cell.addEventListener('click', () => showDate(date));
+          }
+          grid.append(cell);
+        }
+      }
+
+      function refresh() {
+        if (busy) return;
+        busy = true;
+        $('refresh').disabled = true;
+        $('loading').hidden = false;
+        $('status').textContent = '';
+        let finished = false;
+        const timer = setTimeout(
+          () => finish(null, 'Calendar timed out. Press Refresh to try again.'),
+          60000
+        );
+        function finish(data, error) {
+          if (finished) return;
+          finished = true;
+          clearTimeout(timer);
+          busy = false;
+          $('refresh').disabled = false;
+          $('loading').hidden = true;
+          if (
+            error ||
+            !data ||
+            !Array.isArray(data.slots) ||
+            !data.slots.length ||
+            !Array.isArray(data.meetings)
+          ) {
+            model = null;
+            $('grid').replaceChildren();
+            $('details').replaceChildren();
+            $('prev').disabled = $('next').disabled = true;
+            $('status').textContent = error || 'Calendar unavailable. Press Refresh to try again.';
+            return;
+          }
+          model = data;
+          if (!month) {
+            const today = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/New_York' }).format(
+              new Date()
+            );
+            month = (
+              model.slots.find((slot) => slot.date >= today) || model.slots.at(-1)
+            ).date.slice(0, 7);
+          }
+          $('status').textContent =
+            'Updated ' +
+            new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+          if (selected) showDate(selected);
+          else render();
+        }
+        if (!live)
+          return finish(
+            null,
+            'Local preview. Open this calendar through the school signup connection to see live events.'
+          );
+        google.script.run
+          .withSuccessHandler((data) => finish(data))
+          .withFailureHandler((error) => finish(null, error.message))
+          .getClubCalendar();
+      }
+      function move(amount) {
+        if (!model) return;
+        const date = new Date(month + '-01T12:00:00Z');
+        date.setUTCMonth(date.getUTCMonth() + amount);
+        month = date.toISOString().slice(0, 7);
+        selected = '';
+        $('details').textContent = '';
+        render();
+      }
+      $('prev').addEventListener('click', () => move(-1));
+      $('next').addEventListener('click', () => move(1));
+      $('refresh').addEventListener('click', refresh);
+      $('manage').addEventListener('click', (event) => {
+        if (!embedId) return;
+        event.preventDefault();
+        window.top.postMessage({ type: 'csw:manage', embedId }, '*');
+      });
+      if (live)
+        google.script.url.getLocation((location) => {
+          if (!/^[a-zA-Z0-9-]{36}$/.test(location.parameter.embedId || '')) return;
+          embedId = location.parameter.embedId;
+          const resize = () =>
+            window.top.postMessage(
+              {
+                type: 'csw:resize',
+                embedId,
+                height: Math.ceil(document.body.getBoundingClientRect().height) + 12
+              },
+              '*'
+            );
+          new ResizeObserver(resize).observe(document.body);
+          resize();
+        });
+      refresh();
+      setInterval(() => {
+        if (!document.hidden) refresh();
+      }, 120000);
+    </script>
+  </body>
+</html>
