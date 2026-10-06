@@ -1,0 +1,32 @@
+.loading-logo {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  animation: logo-pulse 1s ease-in-out infinite alternate;
+}
+.setup-notice {
+  padding: 12px;
+  text-align: center;
+  color: #dbe6fa;
+}
+.setup-notice[hidden] {
+  display: none;
+}
+.booking-fallback {
+  margin-top: 16px;
+  text-align: center;
+}
+.booking-fallback a {
+  color: #accaff;
+}
+@keyframes logo-pulse {
+  to {
+    opacity: 0.35;
+    transform: scale(0.92);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .loading-logo {
+    animation: none;
+  }
+}

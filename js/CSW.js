@@ -1,6 +1,6 @@
 // Typewriter Effect
-const typewriterText = "CS Wednesdays";
-const typewriterElement = document.getElementById("typewriter");
+const typewriterText = 'CS Wednesdays';
+const typewriterElement = document.getElementById('typewriter');
 let index = 0;
 
 function typeWriter() {
@@ -14,19 +14,19 @@ function typeWriter() {
 
 // Subtitle Cycling
 const subtitles = [
-  "Student Presentations.",
-  "Student innovation.",
-  "Led by Students for Students."
+  'Student Presentations.',
+  'Student innovation.',
+  'Led by Students for Students.'
 ];
 let subtitleIndex = 0;
-const subtitleElement = document.getElementById("subtitle");
+const subtitleElement = document.getElementById('subtitle');
 
 function cycleSubtitles() {
   if (!subtitleElement) return;
-  subtitleElement.classList.remove("fade-in");
+  subtitleElement.classList.remove('fade-in');
   setTimeout(() => {
     subtitleElement.textContent = subtitles[subtitleIndex];
-    subtitleElement.classList.add("fade-in");
+    subtitleElement.classList.add('fade-in');
     subtitleIndex = (subtitleIndex + 1) % subtitles.length;
   }, 500);
 }
@@ -72,19 +72,22 @@ function handleScrollArrow() {
   });
 }
 
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (scrollArrow) {
-      scrollArrow.style.opacity = entry.isIntersecting ? '1' : '0';
-    }
-  });
-}, {
-  root: null,
-  threshold: 0.1
-});
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (scrollArrow) {
+        scrollArrow.style.opacity = entry.isIntersecting ? '1' : '0';
+      }
+    });
+  },
+  {
+    root: null,
+    threshold: 0.1
+  }
+);
 
 // Initialize Everything
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener('DOMContentLoaded', () => {
   typeWriter();
   cycleSubtitles();
   setInterval(cycleSubtitles, 4000);
