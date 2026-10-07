@@ -58,8 +58,10 @@
         color: #accaff;
       }
       #status {
-        min-height: 24px;
         color: #c7d4e9;
+      }
+      #status:empty {
+        display: none;
       }
       #loading {
         width: 56px;
@@ -68,6 +70,7 @@
         animation: pulse 1s ease-in-out infinite alternate;
       }
       #grid {
+        margin-top: 20px;
         display: grid;
         grid-template-columns: repeat(7, minmax(0, 1fr));
         gap: 6px;
@@ -114,9 +117,6 @@
         white-space: pre-line;
         overflow-wrap: anywhere;
       }
-      #legend {
-        color: #c7d4e9;
-      }
       @keyframes pulse {
         to {
           opacity: 0.35;
@@ -158,18 +158,6 @@
       <button id="next" aria-label="Next month" disabled>→</button>
       <button id="refresh">Refresh</button>
     </header>
-    <p id="legend">Club meetings and CS Wednesdays · Eastern time</p>
-    <p>
-      <a
-        id="manage"
-        href="https://drhscit.org/cshs/html/CSW.html?manage=1#organizer"
-        target="_blank"
-        rel="noopener"
-      >
-        Manage calendar
-      </a>
-      · Organizers: verify your school email on the signup page.
-    </p>
     <img id="loading" src="https://drhscit.org/cshs/images/CSHSlogo.png" alt="Loading calendar" />
     <p id="status" role="status" aria-live="polite"></p>
     <div id="grid" aria-label="CSHS dates"></div>
@@ -351,9 +339,6 @@
               model.slots.find((slot) => slot.date >= today) || model.slots.at(-1)
             ).date.slice(0, 7);
           }
-          $('status').textContent =
-            'Updated ' +
-            new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
           if (selected) showDate(selected);
           else render();
         }
@@ -379,11 +364,6 @@
       $('prev').addEventListener('click', () => move(-1));
       $('next').addEventListener('click', () => move(1));
       $('refresh').addEventListener('click', refresh);
-      $('manage').addEventListener('click', (event) => {
-        if (!embedId) return;
-        event.preventDefault();
-        window.top.postMessage({ type: 'csw:manage', embedId }, '*');
-      });
       if (live)
         google.script.url.getLocation((location) => {
           if (!/^[a-zA-Z0-9-]{36}$/.test(location.parameter.embedId || '')) return;
